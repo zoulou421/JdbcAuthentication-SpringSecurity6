@@ -9,28 +9,18 @@
     <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
 </head>
 <body>
+<h2>Add Form for Employee</h2>
 <div layout:fragment="content1">
     <div class="col-md-6 offset-3">
-        <form method="post"  th:action="@{/showNewEmployeeForm}">
-            <div>
-                <label for="firstname">Fist Name</label>
-                <input id="firstname" class="form-control" type="text" name="firstname" th:value="${employee.firstName}">
+        <form method="post"  th:action="@{/saveNewEmployee}" th:object="${employeeDTO}" action="#">
+                <input class="form-control mb-4 col-4" type="text" th:field="*{firstName}"  placeholder="Employee First Name">
 
-            </div>
+                <input class="form-control mb-4 col-4" type="text" th:field="*{lastName}" placeholder="Employee Last Name">
 
-            <div>
-                <label for="lastname">Fist Name</label>
-                <input id="lastname" class="form-control" type="text" name="lastname" th:value="${employee.lastName}">
+                <input class="form-control mb-4 col-4" type="text" th:field="*{email}" placeholder="Employee Email Address">
 
-            </div>
 
-            <div>
-                <label for="email">Email Adress</label>
-                <input id="email" class="form-control" type="text" name="email" th:value="${employee.email}">
-
-            </div>
-
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary col-2">Save</button>
         </form>
     </div>
 </div>

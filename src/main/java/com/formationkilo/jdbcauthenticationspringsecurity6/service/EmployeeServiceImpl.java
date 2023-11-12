@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 //@RequiredArgsConstructor
 @Service
@@ -25,5 +26,22 @@ public class EmployeeServiceImpl implements IEmployeeService{
     @Override
     public void saveEmployee(EmployeeDTO employeeDTO) {
         employeeRepository.save(employeeDTO);
+    }
+
+    @Override
+    public EmployeeDTO getEmployeeById(long id) {
+        Optional<EmployeeDTO> optional=employeeRepository.findById(id);
+        EmployeeDTO employeeDTO=null;
+        if (optional.isPresent()){
+            employeeDTO=optional.get();
+        }else{
+            throw new RuntimeException("Employee not found for id::"+id);
+        }
+        return employeeDTO;
+    }
+
+    @Override
+    public void deleteEmployeeById(long id) {
+        employeeRepository.deleteById(id);
     }
 }

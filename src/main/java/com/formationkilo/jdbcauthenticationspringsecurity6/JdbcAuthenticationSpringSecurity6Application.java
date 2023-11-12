@@ -14,7 +14,7 @@ public class JdbcAuthenticationSpringSecurity6Application {
         SpringApplication.run(JdbcAuthenticationSpringSecurity6Application.class, args);
     }
 
-     @Bean
+    // @Bean
     CommandLineRunner commandLineRunner(EmployeeRepository employeeRepository){
         return  args-> {
             employeeRepository.save(new
