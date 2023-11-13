@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,7 +28,8 @@ public class EmployeeController {
     //V2
     @RequestMapping("/")
     public String homePage(Model model){
-       return findPaginated(1,model);
+       //return findPaginated(1,model);
+        return findPaginated2(1,"firstName","asc",model);
     }
 
     @RequestMapping("/showNewEmployeeForm")
@@ -72,7 +70,7 @@ public class EmployeeController {
         return "redirect:/?id="+id;
     }
 
-    @RequestMapping("/page/{pageNo}")
+    @RequestMapping("/page/v1/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model){
       int pageSize=5;
         Page<EmployeeDTO>page=employeeService.findPaginated(pageNo,pageSize);
@@ -81,6 +79,29 @@ public class EmployeeController {
         model.addAttribute("currentPage",pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listEmployees", listEmployees);
+        return "index";
+    }
+
+    // /page/1?sortField=name&sortDir=asc
+    @RequestMapping("/page/{pageNo}")
+    public String findPaginated2(@PathVariable(value = "pageNo") int pageNo,
+                                 @RequestParam("sortField")String sortField,
+                                 @RequestParam("sortDir") String sortDir,
+                                 Model model){
+        int pageSize=5;
+        Page<EmployeeDTO>page=employeeService.findPaginated2(pageNo,pageSize,sortField,sortDir);
+        List<EmployeeDTO> listEmployees=page.getContent();
+
+        model.addAttribute("currentPage",pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+
+        model.addAttribute("sortField",sortField);
+        model.addAttribute("sortDir",sortDir);
+        model.addAttribute("reserveSortDir",(sortDir.equals("asc")?"desc":"asc"));
+
         model.addAttribute("listEmployees", listEmployees);
         return "index";
     }

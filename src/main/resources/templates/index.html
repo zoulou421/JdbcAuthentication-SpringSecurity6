@@ -18,9 +18,21 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
+                        <th>
+                            <a th:href="@{'/page/'+${currentPage} + '?sortField=firstName&sortDir='+ ${reserveSortDir}} ">
+                            Employee First Name
+                            </a>
+                        </th>
+                        <th>
+                            <a th:href="@{'/page/'+${currentPage} + '?sortField=lastName&sortDir='+ ${reserveSortDir}} ">
+                              Employee   Last Name
+                            </a>
+                        </th>
+                        <th>
+                            <a th:href="@{'/page/'+${currentPage} + '?sortField=email&sortDir='+ ${reserveSortDir}} ">
+                             Employee   Email Adress
+                            </a>
+                        </th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -36,6 +48,7 @@
                     </tr>
                     </tbody>
                 </table>
+                <!--pagination part modified in the purpose of adding sorting methods>
 
                 <div th:if="${totalPages > 1}">
                     <div class="row col-sm-10">
@@ -58,7 +71,31 @@
                             <span th:unless="${currentPage < totalPages}" >Last</span>
                         </div>
                     </div>
-                </div>
+                </div-->
+                <!--fin add-->
+
+                <div th:if="${totalPages > 1}">
+                    <div class="row col-sm-10">
+                        <div class="col-sm-2">
+                            Total rows: [[${totalItems}]]
+                        </div>
+                        <div class="col-sm-1">
+                             <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                 <!--Ajout et fin de l'ajout-->  <a th:if="${currentPage != i}" th:href="@{'/page/'+ ${i} + '?sortField='+${sortField}+ '&sortDir='+${sortDir} }">[[${i}]]</a>
+                                 <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                             </span>
+                        </div>
+                        <div class="col-sm-1">
+                            <a th:if="${currentPage < totalPages}" th:href="@{'/page/' +${currentPage+1} + '?sortField='+${sortField}+ '&sortDir='+${sortDir} }">Next</a>
+                            <span th:unless="${currentPage < totalPages}" >Next</span>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <a th:if="${currentPage < totalPages}" th:href="@{'/page/' +${totalPages} + '?sortField='+${sortField}+ '&sortDir='+${sortDir} }">Last</a>
+                            <span th:unless="${currentPage < totalPages}" >Last</span>
+                        </div>
+                    </div>
+                    </div>
             </div>
         </div>
     </div>
