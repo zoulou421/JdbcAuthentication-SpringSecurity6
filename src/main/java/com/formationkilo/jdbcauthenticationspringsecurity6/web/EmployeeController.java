@@ -5,6 +5,7 @@ import com.formationkilo.jdbcauthenticationspringsecurity6.service.EmployeeServi
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,16 +13,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 //@RequiredArgsConstructor
 public class EmployeeController {
 
     @Autowired
     private EmployeeServiceImpl employeeService;
-    @RequestMapping("/")
-    public String homePage(Model model){
+    //V1
+    @RequestMapping("/v1")
+    public String homePage2(Model model){
        model.addAttribute("list_employees",employeeService.getAllEmployees());
        return "index";
+    }
+
+    //V2
+    @RequestMapping("/")
+    public String homePage(Model model){
+       return findPaginated(1,model);
     }
 
     @RequestMapping("/showNewEmployeeForm")
@@ -60,6 +70,19 @@ public class EmployeeController {
         employeeService.deleteEmployeeById(id);
 
         return "redirect:/?id="+id;
+    }
+
+    @RequestMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model){
+      int pageSize=5;
+        Page<EmployeeDTO>page=employeeService.findPaginated(pageNo,pageSize);
+        List<EmployeeDTO> listEmployees=page.getContent();
+
+        model.addAttribute("currentPage",pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listEmployees", listEmployees);
+        return "index";
     }
 
 

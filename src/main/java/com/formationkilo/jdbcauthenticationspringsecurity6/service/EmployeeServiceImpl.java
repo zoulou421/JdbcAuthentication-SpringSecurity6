@@ -5,6 +5,10 @@ import com.formationkilo.jdbcauthenticationspringsecurity6.dto.EmployeeDTO;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +47,11 @@ public class EmployeeServiceImpl implements IEmployeeService{
     @Override
     public void deleteEmployeeById(long id) {
         employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<EmployeeDTO> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable= PageRequest.of(pageNo-1, pageSize);
+        return employeeRepository.findAll(pageable);
     }
 }
