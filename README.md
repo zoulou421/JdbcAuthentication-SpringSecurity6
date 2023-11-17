@@ -1,6 +1,6 @@
 <h1>InMemoryAuthentication//JDBCAuthentication//UserDetailsServiceAuthentication and Authorization Java app Springboot 3 | Spring Security 6 | Thymeleaf
 </h1>
-<h2>You have 3 Stragies of Authentication in ONE PROJECT</h2>
+<h2>You have 3 Strategies of Authentication all tested in ONE PROJECT</h2>
 <p>💯%FREE: COPY THIS CODE TRY IT AND SHARE IT</p>
 <div>
    <h3>Technologies involved:</h3>
