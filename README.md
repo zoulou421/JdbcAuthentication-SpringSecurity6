@@ -1,5 +1,6 @@
-<h1>JDBCAuthentication and Authorization Java app Springboot 3 | Spring Security 6 | Thymeleaf
+<h1>InMemoryAuthentication//JDBCAuthentication//UserDetailsServiceAuthentication and Authorization Java app Springboot 3 | Spring Security 6 | Thymeleaf
 </h1>
+<h2>You have 3 Stragies of Authentication in ONE PROJECT</h2>
 <p>💯%FREE: COPY THIS CODE TRY IT AND SHARE IT</p>
 <div>
    <h3>Technologies involved:</h3>
@@ -20,7 +21,7 @@
 ![jdbcaut.JPG](src%2Fmain%2Fresources%2Fstatic%2Fimages%2Fjdbcaut.JPG)
 <br />
 
-<h3>List data</h3>
+<h3>Data list</h3>
 
 ![jdbcaut2.JPG](src%2Fmain%2Fresources%2Fstatic%2Fimages%2Fjdbcaut2.JPG)
 
@@ -35,15 +36,20 @@
 <h3>updated</h3>
 
 ![jdbcaut2Update2.JPG](src%2Fmain%2Fresources%2Fstatic%2Fimages%2Fjdbcaut2Update2.JPG)
+
 <br />
 
-<h3>add</h3>
+<h3>add data</h3>
+
 ![jdbcaut2add.JPG](src%2Fmain%2Fresources%2Fstatic%2Fimages%2Fjdbcaut2add.JPG)
+
 <br />
 
 
 <h3>Added</h3>
+
 ![jdbcaut2add2.JPG](src%2Fmain%2Fresources%2Fstatic%2Fimages%2Fjdbcaut2add2.JPG)
+
 <br />
 
 @Author: Bonevy BEBY, Software Engineer
