@@ -20,6 +20,8 @@ public class JdbcAuthenticationSpringSecurity6Application {
     public static void main(String[] args) {
         SpringApplication.run(JdbcAuthenticationSpringSecurity6Application.class, args);
     }
+//Noted: if you wanna AUTHORITIES rathan ROLES, put <<authorities>> where you find <<roles>>
+    //mark it very well: if roles , use authorities// if hasRole, use hasAuthority. find it in you app and alter
 
     // @Bean
     CommandLineRunner commandLineRunner(EmployeeRepository employeeRepository){
@@ -41,6 +43,8 @@ public class JdbcAuthenticationSpringSecurity6Application {
           jdbcUserDetailsManager.createUser(
                           User.withUsername("user1").
                           password(passwordEncoder.encode("1234")).roles("USER").build()
+                         // password(passwordEncoder.encode("1234")).authorities("USER").build()
+
 
           );
 

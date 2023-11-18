@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,7 @@ public class EmployeeController {
     }
 
     @RequestMapping("/showNewEmployeeForm")
+    @PreAuthorize("hasAuthority('ADMIN')") //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showNewEmployeeForm(Model model){
         EmployeeDTO employeeDTO=new EmployeeDTO();
         model.addAttribute("employeeDTO", employeeDTO);
@@ -40,6 +42,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/saveNewEmployee")
+    @PreAuthorize("hasAuthority('ADMIN')") //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String saveNewEmployee(@ModelAttribute("employeeDTO")EmployeeDTO employeeDTO){
         //Save employee to database
         employeeService.saveEmployee(employeeDTO);
@@ -48,6 +51,7 @@ public class EmployeeController {
 
 
     @RequestMapping("/showFormForUpdate/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')") //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String showFormForUpdate(@PathVariable(value = "id") long id, Model model){
         //get Employee from the service
         EmployeeDTO employeeDTO= employeeService.getEmployeeById(id);
@@ -60,6 +64,7 @@ public class EmployeeController {
 
 
     @RequestMapping("/deleteEmployee/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')") //@PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteEmployee(@PathVariable(value = "id") long id){
         //get Employee from the service
         EmployeeDTO employeeDTO= employeeService.getEmployeeById(id);

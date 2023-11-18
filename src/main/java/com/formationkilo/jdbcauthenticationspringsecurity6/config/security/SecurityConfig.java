@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 import javax.sql.DataSource;
 
@@ -23,6 +24,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 //@RequiredArgsConstructor
 @AllArgsConstructor
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig  {
 
 
@@ -50,6 +52,8 @@ public class SecurityConfig  {
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/user/**")).hasRole("USER")
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**")).hasRole("ADMIN")
+                        // if you use authority to manage a context, use: hasAuthority("ADMIN")
+                        //Do it in the template view and at the side side which is my case.
                         .anyRequest().authenticated()
                 )
                    .formLogin(withDefaults());//default form spring used
